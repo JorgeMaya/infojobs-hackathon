@@ -1,6 +1,7 @@
 'use client';
 import Image from "next/image";
 import AccessToken from "./api/infoJobs";
+import { GitHubComponent } from "./components/gitHubComponent";
 const { getAccessToken } = AccessToken();
 const handleClick = async () => {
   const auth2 = await getAccessToken();
