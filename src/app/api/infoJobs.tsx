@@ -3,9 +3,9 @@ import { useState } from "react";
 
 const AccessToken = () => {
   const auth = new OAuth2({
-    clientId: "5ebdeed04f9d4033b9ba0af474b512e8",
-    clientSecret: "DGyla1qL6PHLUW94H8qtWOtw1ej5q27q51ypBKLhpFPHtmpxHZ",
-    redirectUri: "http://www.infojobs.net/core/oauth2vc/index.xhtml",
+    clientId: "deb39a1e4a73405a8154f3a6ea46999b",
+    clientSecret: "DGHj/s8ogup2Ifbu13g/u/60ozT17RZp2y4Hypn9z4ur7qo8Rg",
+    redirectUri: "https://verdant-melba-05d66d.netlify.app/",
   });
   //Authorization: Basic NWViZGVlZDA0ZjlkNDAzM2I5YmEwYWY0NzRiNTEyZTg6REd5bGExcUw2UEhMVVc5NEg4cXRXT3R3MWVqNXEyN3E1MXlwQktMaHBGUEh0bXB4SFo=
   
@@ -18,7 +18,7 @@ const AccessToken = () => {
 
   const getAccessToken = async () => {
     let getToken = await auth.getAccessToken(
-      "a5928852-d44b-4389-bdce-5bf01168742f"
+      "dc3c089e-7ae9-46d7-9fde-39cd927d90fa"
     );
     
     return getToken;
@@ -38,4 +38,4 @@ export default AccessToken;
 //     "token_type": "undefined"
 // }
 //AUTHORIZATION CODE
-// https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV&client_id=5ebdeed04f9d4033b9ba0af474b512e8&redirect_uri=http://www.infojobs.net/core/oauth2vc/index.xhtml&response_type=code
+// https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV&client_id=deb39a1e4a73405a8154f3a6ea46999b&redirect_uri=https://verdant-melba-05d66d.netlify.app/&response_type=code
