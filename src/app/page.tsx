@@ -15,6 +15,7 @@ export default function Home() {
           Pruebas
         </p>
       </div>
+      <GitHubComponent></GitHubComponent>
       <button
         onClick={async (event) => {
           event.stopPropagation();
