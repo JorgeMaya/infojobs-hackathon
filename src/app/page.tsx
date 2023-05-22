@@ -1,32 +1,79 @@
-'use client';
-import Image from "next/image";
-import AccessToken from "./api/infoJobs";
+import { Card, Title, Text, Grid, Col } from "@tremor/react";
+import { DetailsComponent } from "./components/detailsComponent";
 import { GitHubComponent } from "./components/gitHubComponent";
+import { getReposByUser, getUser, getUserLanguages } from "./services/githubService";
+import { DesirePositionComponent } from "./components/desirePositionComponent";
+import { SkillComponent } from "./components/skillComponent";
 
-const { getAccessToken } = AccessToken();
+export default async function Home() {
+	const gitUserDetails = await getUser("midudev");
+	const gitReposByUser = await getReposByUser("midudev");
+	const gitLanguages = await getUserLanguages("midudev");
 
-const handleClick = async () => {
-  const auth2 = await getAccessToken();
-  console.log(auth2);
-};
+	return (
+		<main className="w-full border-none h-full p-4 sm:p-10 border-x border-gray-200">
+			<Grid numColsLg={6} className="gap-6 mt-6">
+				<Col numColSpanLg={4}>
+					<Card className="h-full">
+						<DetailsComponent />
+					</Card>
+				</Col>
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Pruebas
-        </p>
-      </div>
-      <GitHubComponent></GitHubComponent>
-      <button
-        onClick={async (event) => {
-          event.stopPropagation();
-          await handleClick();
-        }}
-      >
-        TRY IT!!
-      </button>
-    </main>
-  );
+				<Col numColSpanLg={2}>
+					<div className="space-y-6">
+						<Card
+							decoration="left"
+							decorationColor="cyan"
+							key={gitUserDetails.login}
+							className="h-fit"
+						>
+							<DesirePositionComponent />
+						</Card>
+						<Card
+							decoration="left"
+							decorationColor="purple"
+							key={gitUserDetails.login}
+							className="h-fit"
+						>
+							<GitHubComponent
+								gitUserDetails={gitUserDetails}
+								gitRepos={gitReposByUser}
+								gitUserLanguages={gitLanguages}
+							/>
+						</Card>
+					</div>
+				</Col>
+				<Col numColSpanLg={1}>
+					<Card>
+						<SkillComponent />
+					</Card>
+				</Col>
+				<Col numColSpanLg={1}>
+					<Card>
+						<SkillComponent />
+					</Card>
+				</Col>
+				<Col numColSpanLg={1}>
+					<Card>
+						<SkillComponent />
+					</Card>
+				</Col>
+				<Col numColSpanLg={1}>
+					<Card>
+						<SkillComponent />
+					</Card>
+				</Col>
+				<Col numColSpanLg={1}>
+					<Card>
+						<SkillComponent />
+					</Card>
+				</Col>
+				<Col numColSpanLg={1}>
+					<Card>
+						<SkillComponent />
+					</Card>
+				</Col>
+			</Grid>
+		</main>
+	);
 }
