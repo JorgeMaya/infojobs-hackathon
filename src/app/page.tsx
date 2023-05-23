@@ -12,7 +12,7 @@ export default async function Home() {
 
 	return (
 		<main className="w-full border-none h-full p-4 sm:p-10 border-x border-gray-200">
-			<Grid numColsLg={6} className="gap-6 mt-6">
+			<Grid numColsLg={6} className="gap-6">
 				<Col numColSpanLg={4}>
 					<Card className="h-full">
 						<DetailsComponent />
@@ -42,36 +42,6 @@ export default async function Home() {
 							/>
 						</Card>
 					</div>
-				</Col>
-				<Col numColSpanLg={1}>
-					<Card>
-						<SkillComponent />
-					</Card>
-				</Col>
-				<Col numColSpanLg={1}>
-					<Card>
-						<SkillComponent />
-					</Card>
-				</Col>
-				<Col numColSpanLg={1}>
-					<Card>
-						<SkillComponent />
-					</Card>
-				</Col>
-				<Col numColSpanLg={1}>
-					<Card>
-						<SkillComponent />
-					</Card>
-				</Col>
-				<Col numColSpanLg={1}>
-					<Card>
-						<SkillComponent />
-					</Card>
-				</Col>
-				<Col numColSpanLg={1}>
-					<Card>
-						<SkillComponent />
-					</Card>
 				</Col>
 			</Grid>
 		</main>

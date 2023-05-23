@@ -18,7 +18,7 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<header>
 					<nav className="bg-white shadow shadow-gray-300 w-100 px-8 md:px-auto">
-						<div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
+						<div className="md:h-20 h-36 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
 							<div className="text-cyan-500 md:order-1">
 								<svg
 									width="158"
