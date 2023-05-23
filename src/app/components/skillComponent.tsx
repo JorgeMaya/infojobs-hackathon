@@ -20,14 +20,7 @@ const website: Tracker[] = [
 	{ color: "cyan", tooltip: "Alto" },
 ];
 
-const categories = [
-	{
-		data: website,
-	},
-];
-
 export function SkillComponent() {
-	//const subCategoryPercentageValues = [33, 33, 33];
 	return (
 		<div className="h-auto">
 			<Title className="text-xl">Nombre Skill</Title>
@@ -40,15 +33,6 @@ export function SkillComponent() {
 				</Text>
 				<Tracker data={website} className="h-5 w-20 mt-2 ml-4" />
 			</Flex>
-
-			{/* <CategoryBar
-            categoryPercentageValues={subCategoryPercentageValues}
-            colors={["blue", "blue", "gray"]}
-            percentageValue={66}
-            tooltip={"6.6"}
-            showLabels={false}
-            className="mt-5"
-          /> */}
 		</div>
 	);
 }
