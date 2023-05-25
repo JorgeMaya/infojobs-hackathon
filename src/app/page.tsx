@@ -1,9 +1,15 @@
 import { Card, Title, Text, Grid, Col } from "@tremor/react";
 import { DetailsComponent } from "./components/detailsComponent";
-import { GitHubComponent } from "./components/gitHubComponent";
 import { getReposByUser, getUser, getUserLanguages } from "./services/githubService";
 import { DesirePositionComponent } from "./components/desirePositionComponent";
 import { SkillComponent } from "./components/skillComponent";
+'use client';
+import Image from "next/image";
+import { getToken } from "./api/infoJobs";
+import { GitHubComponent } from "./components/gitHubComponent";
+const handleClick = async () => {
+  const token = await getToken().then((val) => {return val;});
+};
 
 export default async function Home() {
 	const gitUserDetails = await getUser("midudev");
