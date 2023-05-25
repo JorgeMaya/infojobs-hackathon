@@ -3,7 +3,6 @@ import { DetailsComponent } from "./components/detailsComponent";
 import { getReposByUser, getUser, getUserLanguages } from "./services/githubService";
 import { DesirePositionComponent } from "./components/desirePositionComponent";
 import { SkillComponent } from "./components/skillComponent";
-'use client';
 import Image from "next/image";
 import { getToken } from "./api/infoJobs";
 import { GitHubComponent } from "./components/gitHubComponent";

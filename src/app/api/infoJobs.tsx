@@ -1,9 +1,13 @@
 const { OAuth2 } = require('infojobs-auth-library');
 import config from '../config';
-const xhr = new XMLHttpRequest();
-var refresh_token = localStorage.getItem("refresh_token") ?? '';
-var getlocal;
 
+var refresh_token;
+if (typeof window !== 'undefined') {
+  // Perform localStorage action
+  refresh_token = localStorage.getItem("refresh_token") ?? '';
+}
+
+var getlocal;
 
 const auth = new OAuth2({
     clientId: config.clientId,
@@ -34,7 +38,7 @@ export async function getToken () {
   
   const token = await auth.getAccessToken('ae90fdff-294f-4cb6-817e-3ead7d8652fe');
   
-  if(token.error === 'invalid_grant') {
+  if(token.error === 'invalid_grant' && typeof window !== 'undefined') { //PASAR A USEEFECT PARA QUE SE VEA PRO!
     const refresh = await auth.refreshAccessToken(token.refresh_token);
     refresh_token = refresh.refresh_token;
     getlocal= localStorage.setItem("refresh_token", refresh_token);
