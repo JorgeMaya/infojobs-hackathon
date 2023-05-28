@@ -14,6 +14,7 @@ import {
 	ListItem,
 } from "@tremor/react";
 import { GitRepo, GitUserDetails } from "../types";
+import ButtonComponent from "./buttonComponent";
 
 export function GitHubComponent(props: {
 	gitUserDetails: GitUserDetails;
@@ -78,7 +79,7 @@ export function GitHubComponent(props: {
 				</AccordionBody>
 			</Accordion>
 			<Flex justifyContent="end">
-				<Button
+				{/* <Button
 					size="sm"
 					variant="secondary"
 					iconPosition="right"
@@ -86,7 +87,8 @@ export function GitHubComponent(props: {
 					onClick={() => window.open(gitUserDetails.html_url, "_blank")}
 				>
 					Ir a GitHub
-				</Button>
+				</Button> */}
+				<ButtonComponent clickEvent={() => window.open(gitUserDetails.html_url, "_blank")} text='Ir a GitHub'></ButtonComponent>
 			</Flex>
 		</div>
 	);

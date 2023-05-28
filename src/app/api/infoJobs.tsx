@@ -1,41 +1,45 @@
-import { OAuth2 } from "infojobs-auth-library";
-import { useState } from "react";
+const { OAuth2 } = require('infojobs-auth-library');
+import { useContext } from 'react';
+import config from '../config';
+import AppContext from '../context/app-context';
+const { state } = useContext(AppContext);
 
-const AccessToken = () => {
-  const auth = new OAuth2({
-    clientId: "deb39a1e4a73405a8154f3a6ea46999b",
-    clientSecret: "DGHj/s8ogup2Ifbu13g/u/60ozT17RZp2y4Hypn9z4ur7qo8Rg",
-    redirectUri: "https://verdant-melba-05d66d.netlify.app/",
-  });
-  //Authorization: Basic NWViZGVlZDA0ZjlkNDAzM2I5YmEwYWY0NzRiNTEyZTg6REd5bGExcUw2UEhMVVc5NEg4cXRXT3R3MWVqNXEyN3E1MXlwQktMaHBGUEh0bXB4SFo=
-  
-  const authUrl = auth.generateAuthUrl({
-    responseType: "code",
-    scope: [
-      "MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV",
-    ],
-  });
-
-  const getAccessToken = async () => {
-    let getToken = await auth.getAccessToken(
-      "dc3c089e-7ae9-46d7-9fde-39cd927d90fa"
-    );
-    
-    return getToken;
-    // await auth.refreshAccessToken(token.refresh_token);
-  }
-  return {
-    getAccessToken
-  };
+var refresh_token;
+if (typeof window !== 'undefined') {
+  // Perform localStorage action
+  refresh_token = localStorage.getItem("refresh_token") ?? '';
 }
 
-export default AccessToken;
+var getlocal;
 
-// {
-//     "access_token": "4fefdfd7-b191-4b51-affc-988692a74705",
-//     "expires_in": 43199,
-//     "refresh_token": "2602b966-cdcf-44c6-a737-28f2fdf8b9d8",
-//     "token_type": "undefined"
-// }
-//AUTHORIZATION CODE
+const auth = new OAuth2({
+    clientId: config.clientId,
+    clientSecret: config.clientSecret,
+    redirectUri: config.redirectUri,
+});
+// Generate the url that will be used for the consent dialog.
+const authUrl = auth.generateAuthUrl({
+    responseType: 'code',
+    scope: ["MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV",],
+});
+
+export async function getToken () {
+  
+  const token = await auth.getAccessToken(state);
+  
+  if(token.error === 'invalid_grant' && typeof window !== 'undefined') { //PASAR A USEEFECT PARA QUE SE VEA PRO!
+    const refresh = await auth.refreshAccessToken(token.refresh_token);
+    refresh_token = refresh.refresh_token;
+    getlocal= localStorage.setItem("refresh_token", refresh_token);
+    console.log('refresh', refresh);
+    return refresh_token;
+  } else {
+    refresh_token = token.refresh_token;
+    getlocal= localStorage.setItem("refresh_token", refresh_token);
+    console.log('token', token);
+  }
+  
+  return refresh_token;
+};
+
 // https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV&client_id=deb39a1e4a73405a8154f3a6ea46999b&redirect_uri=https://verdant-melba-05d66d.netlify.app/&response_type=code
