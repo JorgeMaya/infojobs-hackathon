@@ -13,6 +13,7 @@ import AppContext from "../context/app-context";
 import HeaderComponent from "../components/headerComponent";
 import { GitUserDetails } from "../types";
 import { GitRepo } from "../types";
+import { getToken } from "../api/infoJobs";
 
 export function HomePage(props: {}) {
 	const [gitUserDetails, setGitUserDetails] = useState({} as GitUserDetails);
@@ -24,13 +25,15 @@ export function HomePage(props: {}) {
 		setGitReposByUser(await getReposByUser("midudev"));
 		setGitLanguages(await getUserLanguages("midudev"));
 	};
-	const { setState } = useContext(AppContext);
+	const { state, setState } = useContext(AppContext);
 
 	useEffect(() => {
 		const url = window.location.href;
 		const code = url.split(/[?=&]/)[2];
 		console.log("code", code);
 		setState(code);
+		console.log('state', state);
+		getToken(state);
 		getGitData();
 	}, []);
 

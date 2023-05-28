@@ -1,10 +1,6 @@
 "use client";
 import ButtonComponent from "./buttonComponent";
 const HeaderComponent = () => {
-	const redirectUri = () => {
-		window.location.href =
-			"https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV&client_id=deb39a1e4a73405a8154f3a6ea46999b&redirect_uri=https://verdant-melba-05d66d.netlify.app/&response_type=code";
-	};
 	return (
 		<nav className="bg-white shadow shadow-gray-300 w-100 px-8 md:px-auto">
 			<div className="md:h-20 h-36 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
@@ -43,7 +39,6 @@ const HeaderComponent = () => {
 				<div className="order-2 md:order-3">
 					<ButtonComponent
 						clickEvent={() => {
-              console.log("click");
 							window.open(
 								"https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV&client_id=deb39a1e4a73405a8154f3a6ea46999b&redirect_uri=https://verdant-melba-05d66d.netlify.app/&response_type=code",
 								"_self"
