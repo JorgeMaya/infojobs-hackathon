@@ -29,7 +29,7 @@ export function HomePage(props: {}) {
 	useEffect(() => {
 		const url = window.location.href;
 		const code = url.split(/[?=&]/)[2];
-		//console.log("code", code);
+		console.log("code", code);
 		setState(code);
 		getGitData();
 	}, []);
