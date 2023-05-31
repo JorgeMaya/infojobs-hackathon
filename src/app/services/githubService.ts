@@ -88,11 +88,18 @@ export async function getUser(gitUsername: string) {
 		headers: {
 			"Content-Type": "application/json",
 		},
+	}).then((res) => {
+		console.log(res.status);
+		if (res.status === 404) {
+			throw new Error("User not found");
+		}
+		return res;
 	});
 
 	const userDetails: GitUserDetails = await res.json();
 
 	return userDetails;
+
 }
 
 export async function getReposByUser(gitUsername: string) {
@@ -102,6 +109,11 @@ export async function getReposByUser(gitUsername: string) {
 		headers: {
 			"Content-Type": "application/json",
 		},
+	}).then((res) => {
+		if (res.status === 404) {
+			throw new Error("User not found");
+		}
+		return res;
 	});
 
 	const repos: APIRepo[] = await res.json();

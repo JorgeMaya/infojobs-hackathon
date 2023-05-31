@@ -7,23 +7,43 @@ import { useContext, useEffect } from "react";
 import AppContext from "../context/app-context";
 import HeaderComponent from "../components/headerComponent";
 import LogInComponent from "../components/logInComponent";
+import {
+	getReposByUser,
+	getUser,
+	getUserLanguages,
+} from "../services/githubService";
 
 export function HomePage(props: {}) {
-	const { setState, session, logout } = useContext(AppContext);
+	const {
+		setCode,
+		gitUsername,
+		setGitUserDetails,
+		setGitReposByUser,
+		setGitLanguages,
+		gitLanguages
+	} = useContext(AppContext);
+
+	const getGitHubData = async () => {
+		setGitUserDetails(await getUser(gitUsername));
+		setGitReposByUser(await getReposByUser(gitUsername));
+		setGitLanguages(await getUserLanguages(gitUsername));
+	};
 
 	useEffect(() => {
-		logout();
 		const url = window.location.href;
 		const code = url.split(/[?=&]/)[2];
 		console.log("code", code);
-		setState(code);
-	}, []);
+		setCode(code);
+		if (gitUsername !== "") {
+			getGitHubData();
+		}
+	}, [gitUsername]);
 
 	return (
 		<>
 			<HeaderComponent />
 			<main className="w-full border-none h-full p-4 sm:p-10 border-x border-gray-200">
-				{!session ? (
+				{ gitLanguages.length == 0 ? (
 					<Flex justifyContent="center">
 						<LogInComponent />
 					</Flex>
@@ -49,7 +69,7 @@ export function HomePage(props: {}) {
 									decorationColor="purple"
 									className="h-fit"
 								>
-									<GitHubComponent/>
+									<GitHubComponent />
 								</Card>
 							</div>
 						</Col>
