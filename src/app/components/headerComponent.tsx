@@ -1,6 +1,5 @@
 "use client";
 import AppContext from "../context/app-context";
-import ButtonComponent from "./buttonComponent";
 import { useContext } from "react";
 
 const HeaderComponent = () => {
