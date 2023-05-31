@@ -82,8 +82,9 @@ interface APIRepo {
 	default_branch: string;
 }
 
-export async function getUser(id: string) {
-	const res = await fetch(`https://api.github.com/users/${id}`, {
+export async function getUser(gitUsername: string) {
+	const url = "https://api.github.com/users/"+gitUsername;
+	const res = await fetch(url, {
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -94,8 +95,10 @@ export async function getUser(id: string) {
 	return userDetails;
 }
 
-export async function getReposByUser(id: string) {
-	const res = await fetch(`https://api.github.com/users/${id}/repos`, {
+export async function getReposByUser(gitUsername: string) {
+
+	const url = "https://api.github.com/users/"+gitUsername+"/repos";
+	const res = await fetch(url, {
 		headers: {
 			"Content-Type": "application/json",
 		},
@@ -111,8 +114,8 @@ export async function getReposByUser(id: string) {
 	return listOfRepos;
 }
 
-export async function getUserLanguages(id: string) {
-	const repos = await getReposByUser(id);
+export async function getUserLanguages(gitUsername: string) {
+	const repos = await getReposByUser(gitUsername);
 	const languages: string[] = [];
 
 	for (const repo in repos) {

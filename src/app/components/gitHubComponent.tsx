@@ -1,28 +1,24 @@
 "use client"
 import {
 	Bold,
-	Button,
 	Flex,
 	Title,
 	Text,
 	Accordion,
 	AccordionBody,
 	AccordionHeader,
-	Divider,
 	Badge,
 	List,
 	ListItem,
+	Button,
 } from "@tremor/react";
-import { GitRepo, GitUserDetails } from "../types";
 import ButtonComponent from "./buttonComponent";
+import AppContext from "../context/app-context";
+import { useContext } from "react";
 
-export function GitHubComponent(props: {
-	gitUserDetails: GitUserDetails;
-	gitRepos: GitRepo[];
-	gitUserLanguages: string[];
-}) {
-	const { gitUserDetails, gitRepos, gitUserLanguages } = props;
-
+export function GitHubComponent(props: {}) {
+	const { gitUserDetails, gitReposByUser, gitLanguages } = useContext(AppContext);
+	
 	return (
 		<div className="h-auto">
 			<Flex justifyContent="start" className="space-x-4">
@@ -38,8 +34,8 @@ export function GitHubComponent(props: {
 			<Flex className="mt-3">
 				<Text>{gitUserDetails.bio}</Text>
 			</Flex>
-			{gitUserLanguages.map((language) => (
-				<Badge className="mr-2 mt-3" size="xs">
+			{gitLanguages.map((language) => (
+				<Badge key={language} className="mr-2 mt-3" size="xs">
 					{language}
 				</Badge>
 			))}
@@ -54,7 +50,7 @@ export function GitHubComponent(props: {
 				</AccordionHeader>
 				<AccordionBody>
 					<List className="mt-4 h-72 overflow-y-scroll">
-						{gitRepos.map((repo) => (
+						{gitReposByUser.map((repo) => (
 							<ListItem
 								key={repo.full_name}
 								onClick={() => window.open(repo.html_url, "_blank")}
@@ -79,7 +75,7 @@ export function GitHubComponent(props: {
 				</AccordionBody>
 			</Accordion>
 			<Flex justifyContent="end">
-				{/* <Button
+				<Button
 					size="sm"
 					variant="secondary"
 					iconPosition="right"
@@ -87,8 +83,7 @@ export function GitHubComponent(props: {
 					onClick={() => window.open(gitUserDetails.html_url, "_blank")}
 				>
 					Ir a GitHub
-				</Button> */}
-				<ButtonComponent clickEvent={() => window.open(gitUserDetails.html_url, "_blank")} text='Ir a GitHub'></ButtonComponent>
+				</Button>
 			</Flex>
 		</div>
 	);
