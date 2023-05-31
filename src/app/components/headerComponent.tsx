@@ -1,6 +1,10 @@
 "use client";
-import ButtonComponent from "./buttonComponent";
+import AppContext from "../context/app-context";
+import { useContext } from "react";
+
 const HeaderComponent = () => {
+	const { session, logout } = useContext(AppContext);
+
 	return (
 		<nav className="bg-white shadow shadow-gray-300 w-100 px-8 md:px-auto">
 			<div className="md:h-20 h-36 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
@@ -20,33 +24,35 @@ const HeaderComponent = () => {
 						/>
 					</svg>
 				</div>
-				<div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
-					<ul className="flex font-semibold justify-between">
-						<li className="md:px-4 md:py-2 text-sky-500">
-							<a href="#">CV</a>
-						</li>
-						<li className="md:px-4 md:py-2 hover:text-sky-400">
-							<a href="#">Empleos</a>
-						</li>
-						<li className="md:px-4 md:py-2 hover:text-sky-400">
-							<a href="#">Mis ofertas</a>
-						</li>
-						<li className="md:px-4 md:py-2 hover:text-sky-400">
-							<a href="#">Quién me ve</a>
-						</li>
-					</ul>
-				</div>
-				<div className="order-2 md:order-3">
-					<ButtonComponent
-						clickEvent={() => {
-							window.open(
-								"https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV&client_id=deb39a1e4a73405a8154f3a6ea46999b&redirect_uri=https://verdant-melba-05d66d.netlify.app/&response_type=code",
-								"_self"
-							);
-						}}
-						text="Login"
-					></ButtonComponent>
-				</div>
+
+				{!session ? null : (
+					<>
+						<div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
+							<ul className="flex font-semibold justify-between">
+								<li className="md:px-4 md:py-2 text-sky-500">
+									<a href="#">CV</a>
+								</li>
+								<li className="md:px-4 md:py-2 hover:text-sky-400">
+									<a href="#">Empleos</a>
+								</li>
+								<li className="md:px-4 md:py-2 hover:text-sky-400">
+									<a href="#">Mis ofertas</a>
+								</li>
+								<li className="md:px-4 md:py-2 hover:text-sky-400">
+									<a href="#">Quién me ve</a>
+								</li>
+							</ul>
+						</div>
+						<div className="order-2 md:order-3">
+							<button
+								onClick={logout}
+								className="tracking-wide font-semibold bg-sky-600 text-gray-100 py-4 rounded-lg hover:bg-sky-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none"
+							>
+								<span className="ml-3 mr-3">Cerrar sesión</span>
+							</button>
+						</div>
+					</>
+				)}
 			</div>
 		</nav>
 	);
