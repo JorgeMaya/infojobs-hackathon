@@ -39,7 +39,6 @@ export function GitHubComponent(props: {}) {
 					{language}
 				</Badge>
 			))}
-			{/* <Divider /> */}
 			<Accordion className="mt-6">
 				<AccordionHeader>
 					<div className="space-y-2">
