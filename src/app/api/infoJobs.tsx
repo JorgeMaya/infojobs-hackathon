@@ -21,25 +21,3 @@ export async function getToken(state: string) {
   tokenData = token;
   return token;
 };
-
-export async function getOffers() {
-  const request = await fetch(`${config.baseUrl}api/9/offer`, {
-    method: 'GET',
-    headers: {
-      Authentication: `Basic ${config.authenticationCode}`
-    }
-  });
-  const response = await request.json();
-  return response.items;
-}
-
-export async function getCVS() {
-  const request = await fetch(`${config.baseUrl}api/2/curriculum`, {
-    method: 'GET',
-    headers: {
-      Authentication: `Basic ${config.authenticationCode} Bearer ${tokenData.access_token}}`
-    }
-  });
-  const response = await request.json();
-  return response; //array
-}
