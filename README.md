@@ -6,15 +6,15 @@ Este repositorio contiene el código fuente de un proyecto desarrollado en Next.
 
 ## Descripción del Proyecto
 
-Presentamos una propuesta de mejora para el sitio de InfoJobs mediante la implementación del API de GitHub, Udemy y LinkedIn (Cancelada por que no nos aprobaron el uso como developers y la version abierta no contiene la información necesaria, pero dejamos la idea por si sirve de algo). Nuestra propuesta incluye la creación de una experiencia más enriquecedora para los usuarios al buscar empleo, mejorar sus habilidades técnicas y aprovechar las ventajas de una integración con las plataformas mencionadas.
+Presentamos una propuesta de mejora para el sitio de InfoJobs mediante la implementación del API de GitHub, Udemy (solo mocks de momento, implementacion en desarrollo) y LinkedIn (Cancelada por que no nos aprobaron el uso como developers y la version abierta no contiene la información necesaria, pero dejamos la idea por si sirve de algo). Nuestra propuesta incluye la creación de una experiencia más enriquecedora para los usuarios al buscar empleo, mejorar sus habilidades técnicas y aprovechar las ventajas de una integración con las plataformas mencionadas.
 
 El proyecto se enfoca en la implementación de varias integraciones para enriquecer la plataforma de InfoJobs. Se utilizan los siguientes APIs y funcionalidades:
 
 - API de GitHub: Se utiliza para importar automáticamente los proyectos y tecnologías utilizadas por los usuarios. Esto proporciona una visión más detallada de las habilidades técnicas de los candidatos a través de una visualización gráfica en su perfil de InfoJobs.
 
-- API de Udemy: Se emplea para recomendar cursos relevantes basados en las tecnologías utilizadas en los proyectos pasados de los usuarios. Esto ayuda a los usuarios a mantenerse actualizados y expandir sus conocimientos en sus áreas de interés.
+- API de Udemy (En desarrollo): Se emplea para recomendar cursos relevantes basados en las tecnologías utilizadas en los proyectos pasados de los usuarios. Esto ayuda a los usuarios a mantenerse actualizados y expandir sus conocimientos en sus áreas de interés.
 
-- Integración con LinkedIn (Pnediente por permisos de LinkedIn): Se logra la sincronización automática del perfil y experiencia laboral de los usuarios con InfoJobs. Esto crea un perfil unificado en ambos sitios, facilitando a los reclutadores obtener una visión completa del candidato y su trayectoria profesional.
+- Integración con LinkedIn (Pendiente por permisos de LinkedIn): Se logra la sincronización automática del perfil y experiencia laboral de los usuarios con InfoJobs. Esto crea un perfil unificado en ambos sitios, facilitando a los reclutadores obtener una visión completa del candidato y su trayectoria profesional.
 
 Además, se ha realizado un rediseño de la página de perfil/curriculum del candidato en InfoJobs para ofrecer una presentación más atractiva y completa de su experiencia laboral, habilidades y proyectos pasados.
 
