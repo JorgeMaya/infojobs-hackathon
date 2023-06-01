@@ -35,8 +35,12 @@ export function HomePage(props: {}) {
 		const code = url.split(/[?=&]/)[2];
 		console.log("code", code);
 		setCode(code);
-		getGitHubData();
-	}, []);
+		setGitUsername(localStorage.getItem("username") || "");
+		console.log("gitUsername", gitUsername);
+		if (gitUsername !== "") {
+			getGitHubData();
+		}
+	}, [gitUsername]);
 
 	return (
 		<>
