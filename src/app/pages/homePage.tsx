@@ -1,5 +1,5 @@
 "use client";
-import { Card, Grid, Col, Flex } from "@tremor/react";
+import { Card, Grid, Col, Flex, Title } from "@tremor/react";
 import { DetailsComponent } from "../components/detailsComponent";
 import { DesirePositionComponent } from "../components/desirePositionComponent";
 import { GitHubComponent } from "../components/gitHubComponent";
@@ -229,6 +229,7 @@ export function HomePage(props: {}) {
 							</div>
 						</Col>
 						<Col numColSpanLg={6}>
+						<Title className="text-3xl font-semibold mb-5 ml-5" >Cursos recomendados</Title>
 							<Flex justifyContent="between">
 							{courses}
 							</Flex>
