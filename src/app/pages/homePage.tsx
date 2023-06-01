@@ -33,6 +33,7 @@ export function HomePage(props: {}) {
 		const url = window.location.href;
 		const code = url.split(/[?=&]/)[2];
 		console.log("code", code);
+		console.log(window.sessionStorage.getItem("username") || "");
 		setCode(code);
 		if (gitUsername !== "") {
 			getGitHubData();
