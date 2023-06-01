@@ -20,7 +20,7 @@ export function HomePage(props: {}) {
 		setGitUserDetails,
 		setGitReposByUser,
 		setGitLanguages,
-		gitLanguages
+		code
 	} = useContext(AppContext);
 
 	const getGitHubData = async () => {
@@ -44,7 +44,7 @@ export function HomePage(props: {}) {
 		<>
 			<HeaderComponent />
 			<main className="w-full border-none h-full p-4 sm:p-10 border-x border-gray-200">
-				{ gitLanguages.length == 0 ? (
+				{ !code ? (
 					<Flex justifyContent="center">
 						<LogInComponent />
 					</Flex>
