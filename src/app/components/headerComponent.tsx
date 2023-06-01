@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { GitUserDetails } from "../types";
 
 const HeaderComponent = () => {
-	const { gitLanguages, setGitLanguages, setGitReposByUser, setGitUserDetails, setCode, setGitUsername } = useContext(AppContext);
+	const { code, setGitLanguages, setGitReposByUser, setGitUserDetails, setCode, setGitUsername } = useContext(AppContext);
 
 	const logout = () => {
 		sessionStorage.removeItem("username");
@@ -35,7 +35,7 @@ const HeaderComponent = () => {
 					</svg>
 				</div>
 
-				{ gitLanguages.length == 0 ? null : (
+				{ !code ? null : (
 					<>
 						<div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
 							<ul className="flex font-semibold justify-between">
