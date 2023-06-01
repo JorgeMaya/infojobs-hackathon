@@ -38,7 +38,7 @@ export function HomePage(props: {}) {
 		if (gitUsername !== "") {
 			getGitHubData();
 		}
-	}, [gitUsername]);
+	}, [gitUsername, code]);
 
 	return (
 		<>
