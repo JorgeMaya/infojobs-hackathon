@@ -19,10 +19,10 @@ const LogInComponent = () => {
 		try {
 			setGitUsername(datos.username);
 			window.sessionStorage.setItem("username", datos.username);
-			window.open(
+			/* window.open(
 				"https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV&client_id=deb39a1e4a73405a8154f3a6ea46999b&redirect_uri=https://verdant-melba-05d66d.netlify.app/&response_type=code",
 				"_self"
-			);
+			); */
 		} catch (error) {
 			console.log(error);
 			window.alert("Usuario de GitHub no encontrado");

@@ -1,9 +1,19 @@
 "use client";
 import AppContext from "../context/app-context";
 import { useContext } from "react";
+import { GitUserDetails } from "../types";
 
 const HeaderComponent = () => {
-	const { session, logout } = useContext(AppContext);
+	const { gitLanguages, setGitLanguages, setGitReposByUser, setGitUserDetails, setCode, setGitUsername } = useContext(AppContext);
+
+	const logout = () => {
+		sessionStorage.removeItem("username");
+		setGitLanguages([]);
+		setGitReposByUser([]);
+		setGitUserDetails({} as GitUserDetails);
+		setCode("");
+		setGitUsername("");
+	};
 
 	return (
 		<nav className="bg-white shadow shadow-gray-300 w-100 px-8 md:px-auto">
@@ -25,7 +35,7 @@ const HeaderComponent = () => {
 					</svg>
 				</div>
 
-				{!session ? null : (
+				{ gitLanguages.length == 0 ? null : (
 					<>
 						<div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
 							<ul className="flex font-semibold justify-between">
