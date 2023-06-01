@@ -20,7 +20,8 @@ export function HomePage(props: {}) {
 		setGitUserDetails,
 		setGitReposByUser,
 		setGitLanguages,
-		code
+		code,
+		setGitUsername
 	} = useContext(AppContext);
 
 	const getGitHubData = async () => {
@@ -33,18 +34,19 @@ export function HomePage(props: {}) {
 		const url = window.location.href;
 		const code = url.split(/[?=&]/)[2];
 		console.log("code", code);
-		console.log(window.sessionStorage.getItem("username") || "");
 		setCode(code);
+		setGitUsername(sessionStorage.getItem("username") || "");
+		console.log("gitUsername", gitUsername);
 		if (gitUsername !== "") {
 			getGitHubData();
 		}
-	}, [gitUsername, code]);
+	}, [gitUsername]);
 
 	return (
 		<>
 			<HeaderComponent />
 			<main className="w-full border-none h-full p-4 sm:p-10 border-x border-gray-200">
-				{ !code ? (
+				{ !code && !gitUsername ? (
 					<Flex justifyContent="center">
 						<LogInComponent />
 					</Flex>
