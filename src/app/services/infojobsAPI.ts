@@ -1,15 +1,87 @@
-const infoJobsTokenBasic ="NWViZGVlZDA0ZjlkNDAzM2I5YmEwYWY0NzRiNTEyZTg6REd5bGExcUw2UEhMVVc5NEg4cXRXT3R3MWVqNXEyN3E1MXlwQktMaHBGUEh0bXB4SFo=";
-const infoJobsTokenBearer = "79981398-2fb1-4b76-8d3d-33300e22bf77";
+import config from "../config";
 
-export async function getCandidateInfo() {
-	const res = await fetch("https://api.infojobs.net/api/6/candidate", {
+const cv_url = "https://api.infojobs.net/api/2/curriculum/";
+const experience_lvl = "https://api.infojobs.net/api/2/curriculum/##CODE##/experience";
+const skills = "https://api.infojobs.net/api/2/curriculum/##CODE##/skill";
+
+export async function getCurriculumList(token: string) {
+	const res = await fetch(cv_url, {
 		headers: {
 			"Content-Type": "application/json",
-			Authorization: `Basic ${infoJobsTokenBasic}, Bearer ${infoJobsTokenBearer}`,
+			Authorization: `Basic ${config.authorizationCode}, Bearer ${token}`,
 		},
 	});
 
-	const item = await res.json();
+	const json = await res.json();
+	if (json.error) return null;
 
-	return item;
+	const cv = json.filter((curriculum: any) => curriculum.principal === true)[0];
+	console.log('cv: ', cv);
+	if (json.error) return null;
+
+	return cv.code;
+}
+
+export async function getCurriculumById(token: string, code: string) {
+  const res = await fetch(`${cv_url}${code}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${config.authorizationCode}, Bearer ${token}`,
+    },
+  });
+
+  const json = await res.json();
+  if (json.error) return null;
+
+  const cv = json.filter((curriculum: any) => curriculum.principal === true)[0];
+
+  if (json.error) return null;
+
+  return cv.code;
+}
+
+export async function getExperiences(token: string, curriculumId: any) {
+	const url = experience_lvl.replace("##CODE##", curriculumId);
+	const res = await fetch(url, {
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Basic ${config.authorizationCode}, Bearer ${token}`,
+		},
+	});
+
+	const json = await res.json();
+	if (json.error) return null;
+
+	let experiences = json.experience.map((experience: any) => {
+		const job = experience.job;
+		const categories = experience.subcategories.join(", ");
+		return `${job}, ${categories}`;
+	});
+
+	experiences = experiences.join(", ");
+	let words = experiences.split(" ");
+	let uniqueExperiences: any = Array.from(new Set(words));
+	uniqueExperiences = uniqueExperiences.join(", ").replaceAll(", ,", ",");
+
+	return uniqueExperiences;
+}
+
+export async function getSkills(token: string, curriculumId: string) {
+	const url = skills.replace("##CODE##", curriculumId);
+	const res = await fetch(url, {
+	headers: {
+		"Content-Type": "application/json",
+		Authorization: `Basic ${config.authorizationCode}, Bearer ${token}`,
+	},
+	});
+
+	const json = await res.json();
+
+	if (json.error) return null;
+
+	let expertises = json.expertise.map((expertises: any) => {
+	return expertises.skill;
+	});
+
+	return expertises;
 }
