@@ -12,7 +12,6 @@ import {
 	ListItem,
 	Button,
 } from "@tremor/react";
-import ButtonComponent from "./buttonComponent";
 import AppContext from "../context/app-context";
 import { useContext } from "react";
 
