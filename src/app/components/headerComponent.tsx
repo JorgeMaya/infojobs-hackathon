@@ -7,7 +7,7 @@ const HeaderComponent = () => {
 	const { code, setGitLanguages, setGitReposByUser, setGitUserDetails, setCode, setGitUsername, gitUsername } = useContext(AppContext);
 
 	const logout = () => {
-		sessionStorage.removeItem("username");
+		localStorage.removeItem("username");
 		setGitLanguages([]);
 		setGitReposByUser([]);
 		setGitUserDetails({} as GitUserDetails);
